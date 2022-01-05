@@ -34,3 +34,7 @@ permissions:
           github:
             - sia-tony-stark
             - sia-happy-hogan
+      - name: arn:aws:iam::874599868815:role/admin
+        users:
+          github:
+            - sia-tony-stark
