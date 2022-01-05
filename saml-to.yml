@@ -3,10 +3,13 @@
 # Config Reference: 
 # https://docs.saml.to/configuration/reference
 version: '20220101'
+variables:
+  awsAccountId: "874599868815"
+  awsSsoDomain: "d-90675b8838"
 providers:
   aws:
-    entityId: https://us-east-1.signin.aws.amazon.com/platform/saml/d-90675b8838
-    loginUrl: https://d-90675b8838.awsapps.com/start
+    entityId: https://us-east-1.signin.aws.amazon.com/platform/saml/<$= awsSsoDomain $>
+    loginUrl: https://<$= awsSsoDomain $>.awsapps.com/start
     acsUrl: https://us-east-1.signin.aws.amazon.com/platform/saml/acs/d8dfb093-53e8-4a13-a711-9f087358ddca
     attributes: {}
     provisioning:
@@ -19,7 +22,7 @@ providers:
     attributes:
       https://aws.amazon.com/SAML/Attributes/RoleSessionName: '<#= user.github.login #>'
       https://aws.amazon.com/SAML/Attributes/SessionDuration: '3600'
-      https://aws.amazon.com/SAML/Attributes/Role: '<#= user.selectedRole #>,arn:aws:iam::874599868815:saml-provider/saml.to'
+      https://aws.amazon.com/SAML/Attributes/Role: '<#= user.selectedRole #>,arn:aws:iam::<$= awsAccountId $>:saml-provider/saml.to'
 permissions:
   aws:
     users:
@@ -29,12 +32,12 @@ permissions:
         - sia-happy-hogan
   aws-iam:
     roles:
-      - name: arn:aws:iam::874599868815:role/iam-readonly
+      - name: arn:aws:iam::<$= awsAccountId $>:role/iam-readonly
         users:
           github:
             - sia-tony-stark
             - sia-happy-hogan
-      - name: arn:aws:iam::874599868815:role/admin
+      - name: arn:aws:iam::<$= awsAccountId $>:role/admin
         users:
           github:
             - sia-tony-stark
