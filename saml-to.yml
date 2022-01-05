@@ -3,14 +3,5 @@
 # Config Reference: 
 # https://docs.saml.to/configuration/reference
 version: '20220101'
-providers:
-  aws:
-    entityId: https://us-east-1.signin.aws.amazon.com/platform/saml/d-90675b8838
-    loginUrl: https://d-90675b8838.awsapps.com/start
-    acsUrl: https://us-east-1.signin.aws.amazon.com/platform/saml/acs/d8dfb093-53e8-4a13-a711-9f087358ddca
-    attributes: {}
-permissions:
-  aws:
-    users:
-      github:
-        - sia-tony-stark
+providers: {}
+permissions: {}
