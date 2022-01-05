@@ -13,6 +13,13 @@ providers:
       scim:
         endpoint: https://scim.us-east-1.amazonaws.com/f3v0725058f-b423-4380-9194-7f38c523d00d/scim/v2/
         encryptedToken: kms::alias/live::AQICAHg2ho2MDdsH/bWicSi9Ut39rJzIcHsU6A5B0No/OiSFBAFj/snJBjG27WF0cxajIrBFAAACrzCCAqsGCSqGSIb3DQEHBqCCApwwggKYAgEAMIICkQYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwYZr65AlpXEiVd8rsCARCAggJioDfyYQcwmjLZv6Wo/YL3hJr4F9lhbK9xdOo+HHJgGQHXbobN14TaEb1ChDY65O9oTqn3A3H0gUpWCW4w5Jf533I6BaEEclteTjoMch6VWtcv9HgSu6D4Gag/ei4+nfTTw7ZGxXDM0gB3LUAwbEgp6CxukkWaaQKT+KXzy98TuAJxbtfkxiX/US97OV8Greun78FtLAhTIGh9R0qCE8YB+EODajK1LxyloTG2J7XflLhHKaDPrK4jeNa9tPALX3ymi5wh+KQ8XjN4LQy63gaGo2aXSdrud08dU5uRQFLb4kFutH5I/gZGNczxghEpORICF7u01ETaUiozP9mMuXsvuMhilsFHliejunH1UjeV1uRtLUanRXPb0g8f/q2dBhsQmK9f+DCcrhpR5WOyMiCmLZc2bWRHHZvRSqxJuXfp6DhRpAiKeFa2KLdrLBhPnoHlmnkk3LIHMOPicKaWDqS3EoKmAlZpLUslV4G2HIdPpL85ycAuAaC4BKW++LwxDhC4Mrcl5AtQQbgv3G5H+h6F9U1VWMjB4LfaL+HwJTMsJ+FzIsrFnsGXTpk64UNht4r217er4MxppKNDWpBmqiFE/4++BmTHVA9sTtc9B7bS62gEp0holyXZn4uONe4eYvzD3Isw3SYzUPkN9ivFHkAJqZlikmuJLqVh6InFcbRIZoUnr9Cwg7dLJ92pGGw/HSMZ56KV5L9WAeAaY7lAjaNs+RiwtFbsaE4j7AwpNRxITVnd6bBSTFAdDkbjA5VmqkEBtI11UGi/UL4EHn6siC3MTeMdZCxsCHcH7msN3JmohZ//fw==
+  aws-iam:
+    entityId: https://signin.aws.amazon.com/saml
+    acsUrl: https://signin.aws.amazon.com/saml
+    attributes:
+      https://aws.amazon.com/SAML/Attributes/RoleSessionName: '<#= user.github.login #>'
+      https://aws.amazon.com/SAML/Attributes/SessionDuration: '3600'
+      https://aws.amazon.com/SAML/Attributes/Role: '<#= user.selectedRole #>,arn:aws:iam::874599868815:saml-provider/saml.to'
 permissions:
   aws:
     users:
@@ -20,3 +27,10 @@ permissions:
         - sia-tony-stark
         - sia-pepper-potts
         - sia-happy-hogan
+  aws-iam:
+    roles:
+      - name: arn:aws:iam::874599868815:role/iam-readonly
+        users:
+          github:
+            - sia-tony-stark
+            - sia-happy-hogan
